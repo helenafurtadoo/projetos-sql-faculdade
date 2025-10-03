@@ -1,0 +1,102 @@
+
+Table PEDIDO eliminado.
+
+
+Table PEDIDO criado.
+
+Nome          Nulo?    Tipo          
+------------- -------- ------------- 
+NUMERO                 NUMBER        
+DATA          NOT NULL DATE          
+PRAZO_ENTREGA NOT NULL DATE          
+RUA                    VARCHAR2(80)  
+NR                     NUMBER(4)     
+BAIRRO                 VARCHAR2(50)  
+COMPLEMENTO            VARCHAR2(100) 
+CIDADE                 VARCHAR2(80)  
+UF                     VARCHAR2(2)   
+CEP                    VARCHAR2(10)  
+TOTAL_FATURA           NUMBER(8,2)   
+CODIGO_CLI    NOT NULL NUMBER        
+MATRICULA_VEN NOT NULL NUMBER        
+
+Table PEDIDO alterado.
+
+
+Table PEDIDO alterado.
+
+
+Table PEDIDO alterado.
+
+
+Table ESTOQUE eliminado.
+
+
+Table ESTOQUE criado.
+
+Nome          Nulo?    Tipo      
+------------- -------- --------- 
+DATA_ENTRADA           DATE      
+CODIGO_PRO    NOT NULL NUMBER    
+CODIGO_PRA    NOT NULL NUMBER(3) 
+QUANTIDADE    NOT NULL NUMBER(5) 
+DATA_VALIDADE          DATE      
+
+Table ESTOQUE alterado.
+
+
+Table ESTOQUE alterado.
+
+
+Table ESTOQUE alterado.
+
+
+Table CAPACIDADE_ESTOQUE eliminado.
+
+
+Table CAPACIDADE_ESTOQUE criado.
+
+Nome       Nulo?    Tipo      
+---------- -------- --------- 
+CODIGO_PRO          NUMBER    
+CODIGO_PRA NOT NULL NUMBER(3) 
+QUANTIDADE NOT NULL NUMBER(5) 
+
+Table CAPACIDADE_ESTOQUE alterado.
+
+
+Table CAPACIDADE_ESTOQUE alterado.
+
+
+Table CAPACIDADE_ESTOQUE alterado.
+
+
+Table ITEM_PRODUTO eliminado.
+
+
+Table ITEM_PRODUTO criado.
+
+Nome           Nulo?    Tipo        
+-------------- -------- ----------- 
+CODIGO_PRO              NUMBER      
+NUMERO_PED     NOT NULL NUMBER(6)   
+QUANTIDADE     NOT NULL NUMBER(5)   
+PRECO_UNITARIO NOT NULL NUMBER(5,2) 
+VALOR_ITEM              NUMBER(7,2) 
+
+Table ITEM_PRODUTO alterado.
+
+
+Table ITEM_PRODUTO alterado.
+
+
+Table ITEM_PRODUTO alterado.
+
+
+TABLE_NAME                     TABLESPACE_NAME                CLUSTER_NAME                   IOT_NAME                       STATUS     PCT_FREE   PCT_USED  INI_TRANS  MAX_TRANS INITIAL_EXTENT NEXT_EXTENT MIN_EXTENTS MAX_EXTENTS PCT_INCREASE  FREELISTS FREELIST_GROUPS LOG B   NUM_ROWS     BLOCKS EMPTY_BLOCKS  AVG_SPACE  CHAIN_CNT AVG_ROW_LEN AVG_SPACE_FREELIST_BLOCKS NUM_FREELIST_BLOCKS DEGREE     INSTANCES  CACHE TABLE_LO SAMPLE_SIZE LAST_ANA PAR IOT_TYPE     T S NES BUFFER_ ROW_MOVE GLO USE DURATION        SKIP_COR MON CLUSTER_OWNER                  DEPENDEN COMPRESS DRO
+------------------------------ ------------------------------ ------------------------------ ------------------------------ -------- ---------- ---------- ---------- ---------- -------------- ----------- ----------- ----------- ------------ ---------- --------------- --- - ---------- ---------- ------------ ---------- ---------- ----------- ------------------------- ------------------- ---------- ---------- ----- -------- ----------- -------- --- ------------ - - --- ------- -------- --- --- --------------- -------- --- ------------------------------ -------- -------- ---
+CAPACIDADE_ESTOQUE             USERS                                                                                        VALID            10                     1        255          65536                       1  2147483645                                         YES N                                                                                                                             1          1     N ENABLED                       NO               N N NO  DEFAULT DISABLED NO  NO                  DISABLED YES                                DISABLED DISABLED NO 
+ESTOQUE                        USERS                                                                                        VALID            10                     1        255          65536                       1  2147483645                                         YES N                                                                                                                             1          1     N ENABLED                       NO               N N NO  DEFAULT DISABLED NO  NO                  DISABLED YES                                DISABLED DISABLED NO 
+ITEM_PRODUTO                   USERS                                                                                        VALID            10                     1        255          65536                       1  2147483645                                         YES N                                                                                                                             1          1     N ENABLED                       NO               N N NO  DEFAULT DISABLED NO  NO                  DISABLED YES                                DISABLED DISABLED NO 
+PEDIDO                         USERS                                                                                        VALID            10                     1        255          65536                       1  2147483645                                         YES N                                                                                                                             1          1     N ENABLED                       NO               N N NO  DEFAULT DISABLED NO  NO                  DISABLED YES                                DISABLED DISABLED NO 
+
