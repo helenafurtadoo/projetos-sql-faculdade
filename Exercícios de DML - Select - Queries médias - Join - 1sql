@@ -1,0 +1,81 @@
+/* Selecionar dados em tabela simples do projeto PEDIDO, em conformidade com os enunciados
+a seguir:*/
+
+
+/* a. Listar os vendedores . Mostrar: Vendedor (MATRICULA e NOME).
+Ordenados pelo nome decrescente. */
+SELECT MATRICULA, NOME
+FROM VENDEDOR
+ORDER BY NOME DESC; -- ORDENR NOME DESCRESCENTE
+
+
+/* b. Listar distintamente os clientes PJ. Mostrar: Nome do cliente
+-- (CLIENTE), CNPJ e CIDADE onde reside. Ordenados pelo nome do cliente
+-- ascendente e, dentro deste, pela cidade descendente. */
+
+--> ORGANIZANDO: 
+        --> DISTINTAMENTE NOME_CLIENTE(NOME_FANTASIA) = USAR DISTINCT (AO LADO DO SELECT)
+        --> NOME DO CLIENTE (ASC) - ASCENDENTE
+        --> CIDADE (DESC) - DESCRESCENTE
+------------ DADOS ------------ 
+        --TABELA CLIENTE:
+            --> DADOS GERAIS DE ENDERECO
+            
+        -- TABELA PJ:
+            --> CIDIGO_CLI (FK QUE LIGA À TABELA CLIENTE, PRESENTE EM PJ)
+            --> CNPJ
+            --> NOME_FANTASIA (NOME DO CLIENTE PJ)
+            
+    /* ENTAO, É NECESSARIO JUNTAR AMBAS AS TABELAS PARA OBTER NOME DO CLIENTE, CNPJ E CIDADE*/
+
+SELECT DISTINCT
+   PJ.NOME_FANTASIA AS NOME_CLIENTE,
+   PJ.CNPJ,
+   C.CIDADE 
+FROM PJ
+JOIN CLIENTE C   -- JUNTANDO COM A TABELA CLIENTE PELA PK CODIGO_CLI Q TAMBEM É FK EM PJ
+    ON PJ.CODIGO_CLI = C.CODIGO
+                        --CODIGO QUE ESTA NA TABELA CLIENTE APELIDADA DE "C"
+ORDER BY 
+    PJ.NOME_FANTASIA ASC,
+    C.CIDADE DESC;
+    
+
+-- c. Listar os vendedores e seus pedidos já realizados com total de
+-- fatura entre R$ 1000,00 e R$ 5000,00, inclusive.. Mostrar: Nome do
+-- vendedor (VENDEDOR), número do pedido (PEDIDO),data do pedido (DATA)
+-- com a formatação 'dd/mm/yyyy'. Ordenados pelo nome do vendedor
+-- descendente e, dentro deste, pela data ascendente.
+
+
+--> ORGANIZANDO:
+        --> NOME_VENDEDOR = DESC
+        --> DATA = ASC --> FORMATACAO 'dd/mm/yyyy'.
+        
+------------ DADOS ------------ 
+    
+        -- TABELA VENDEDOR
+            -->NOME_VENDEDOR 
+            
+        -- TABELA PEDIDO
+            --> MATRICULA_VEN (FK QUE LIGA À TABELA DE VENDEDOR)
+            --> TOTAL_FATURA BETWEEN 1000 AND 5000 
+            --> NUMERO_PEDIDO
+            --> DATA
+            
+SELECT
+    P.NUMERO AS NUM_PEDIDO,
+    TO_CHAR(P.DATA, 'dd/mm/yyyy') AS DATA_PEDIDO,
+    P.TOTAL_FATURA AS TOTAL_FATURA 
+FROM PEDIDO P
+JOIN VENDEDOR V
+    ON P.MATRICULA_VEN = V.MATRICULA
+WHERE P.TOTAL_FATURA BETWEEN 1000 AND 5000 -- 1000 < TOTAL_FATURA > 5000
+ORDER BY 
+    V.NOME DESC,
+    P.DATA ASC;
+    
+    
+            
+
+            
