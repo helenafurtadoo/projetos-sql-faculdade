@@ -1,0 +1,100 @@
+-- a. Selecionar as constraints criadas da tabela ITEM_PRODUTO. Mostrar:
+-- constraint_name (CONSTRAINT), constraint_type (TIPO) e
+-- search_condition (CONDICAO). Ordenado pelo nome da constraint.
+
+-----------ORGANIZANDO--------
+
+--> SELECIONAR DE tabela ITEM_PRODUTO:
+/*  * CONTSTRAINT_NAME AS CONTRAINT
+    * CONSTRAINT_TYE AS TIPO
+    * SERACH_CONDITION AS CONDICAO 
+*/
+SELECT 
+CONSTRAINT_NAME AS CONSTRAINT,
+CONSTRAINT_TYPE AS TIPO,
+SEARCH_CONDITION AS CONDICAO 
+FROM USER_CONSTRAINTS
+WHERE TABEL_NAME = 'ITEM_PRODUTO'
+ORDER BY CONSTRAINT_NAME;
+
+
+-- b. Criar a view de clientes constante do BD Pedidos (VIEW_CLIENTE)
+-- contendo os dados das tabelas CLIENTE, PF e PJ. Em conformidade com a
+-- estrutura disponível no MER físico do projeto BD de Pedido.
+
+
+
+-----------ORGANIZANDO--------
+/*
+CRIAR UM VIEW --> VIEW_CLIENTE
+    com os dados das tabelas:
+        * CLIENTE
+        * PF
+        * PJ
+    --> indicando os seguintes pontos na tabela VW:
+    (1)- TIPO (se é pf ou pj) 
+    (2)- CODIGO (codigo do cliente)
+    (3)- NOME ( nome do cliente)
+    (4)- CNPJ (CNPJ contido em PJ)
+    (5)- CNPF (contido em PF)
+            
+------- OU SEJA, A UNIAO DE DADOS ACONTECE DA SWGUINTE FORMA-------------
+                            CLIENTE + PF (para cliente pessoa fisica)
+                            CLIENTE + PJ (paraa clientes pessoa juridica)
+        --> usar inner join para fazer a juncao das tabelas
+*/
+--- CRIACAO DA VIEW
+CREATE OR REPLACE VIEW VIEW_CLIENTE 
+AS
+--(PF)
+SELECT 
+    'PF' AS TIPO, --(1)
+    C.CODIGO AS CODIGO, --(2)
+    C.NOME AS NOME, --(3)
+    NULL AS CNPJ, --(NULL AS --> crie uma coluna cnpj, mas deixe ela vazia, para os que sao PF, pq n da para ser pf e pj ao mesmo tempo)
+    PF.CNNPF AS CNPF
+    FROM
+        CLIENTE C
+        INNER JOIN PF ON C.CODIGO = PF.CODIGO_CLI -- (JUNTE PF EM C.CODIGO(TABELA CLIENTE) QUE É IGUAL À PF.CODIGO_CLI (NA TABELA PF))
+UNION ALL
+--(PJ)
+SELECT 
+    'PJ' AS TIPO,
+    C.CODIGO AS CODIGO, --(2)
+    C.NOME AS NOME, --(3)
+    PJ.CNPJ AS CNPJ,
+    NULL AS CNPF
+FROM
+    CLIENTE C
+    INNER JOIN PJ ON C.CODIGO = PJ.CODIGO_CLI;
+    
+    ---ANOTACOES DURENTE A AULA DE VIEW---
+--> VIEW - OBJETO DE BD (FACILITAR A EXTracao de dados)
+
+--> query  que determina uma view
+-- USR DROP SO PARA EXCLUIR TABELA
+-- USAR REPLACE "CREATE OR REPLACE..."
+
+/* estrutura basica
+(para tabela 1 juncao com tabela 2)
+CREATE OR REPLACE VIEW nome.da.view
+AS
+SELECT
+selecionar os campos de tabelas desejadas
+FROM
+tabela 1
+INNER JOIN
+tabela 2
+
+UNION ALL
+
+(para tabela 1 juncao com tabela 3)
+CREATE OR REPLACE VIEW nome.da.view
+AS
+SELECT
+selecionar os campos de tabelas desejadas
+FROM
+tabela 1
+INNER JOIN
+tabela 3
+*/
